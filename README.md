@@ -3,14 +3,65 @@
 Boutique en ligne fictive — projet fil rouge Nuxt 4 / Vue 3 / TypeScript.
 API produits & auth : [DummyJSON](https://dummyjson.com).
 
-## Stack
+## Stack et versions exactes
 
-- Nuxt 4.5 (Vue 3, `<script setup>`, SSR, structure `app/`)
-- TypeScript strict (`typescript.strict` + `typescript.typeCheck` dans `nuxt.config.ts`)
-- Pinia (`@pinia/nuxt`) — state management, panier
-- Vitest + `@vitest/coverage-v8` — couverture ≥ 90 % (lignes + branches) imposée sur `app/utils/promotions.ts`
-- ESLint (`@nuxt/eslint`) + Prettier
-- `@nuxt/test-utils` pour les tests en environnement Nuxt
+- Node.js **20** (voir `.nvmrc`)
+- Nuxt **4.5.2**
+- Vue **3.5.43**
+- Pinia (`@pinia/nuxt` **1.0.2**)
+- Vitest **5.0.1** + `@vitest/coverage-v8`
+- ESLint (`@nuxt/eslint` **1.17.0**) + Prettier
+- `@nuxt/test-utils` **4.3.2**
+
+Toutes les versions exactes sont figées dans `package-lock.json` — pas besoin de les retenir, `npm ci` s'en charge (voir ci-dessous).
+
+## Installation — pour obtenir EXACTEMENT le même environnement
+
+**1. Utiliser la bonne version de Node.**
+
+Avec [nvm](https://github.com/nvm-sh/nvm) installé :
+```bash
+nvm use
+```
+Si Node 20 n'est pas installé sur ta machine :
+```bash
+nvm install
+```
+Ça lit automatiquement le fichier `.nvmrc` à la racine du projet.
+
+**2. Cloner le dépôt.**
+```bash
+git clone https://github.com/tatrishvili/ChampaShop.git
+cd ChampaShop
+```
+
+**3. Installer les dépendances avec `npm ci`, PAS `npm install`.**
+```bash
+npm ci
+```
+
+⚠️ **Pourquoi `npm ci` et pas `npm install`** : `npm install` peut installer des versions légèrement différentes de certains paquets si `package.json` autorise une plage de versions (ex. `^1.17.0`). `npm ci` installe exactement ce qui est écrit dans `package-lock.json`, au numéro de version près — c'est ce qui garantit que toute l'équipe tourne sur un environnement identique. `npm ci` supprime aussi `node_modules` avant de réinstaller, donc utilise-le aussi quand tu changes de branche et que quelque chose casse bizarrement.
+
+**4. Approuver les scripts d'installation natifs (une seule fois).**
+
+Deux paquets (`esbuild`, `unrs-resolver`, utilisés en interne par Vite/Nuxt) demandent l'autorisation d'exécuter un script d'installation — c'est normal et attendu :
+```bash
+npm install-scripts approve esbuild
+npm install-scripts approve unrs-resolver
+```
+
+**5. Lancer le serveur de dev.**
+```bash
+npm run dev
+```
+Le site tourne sur http://localhost:3000.
+
+## Si jamais nos environnements divergent
+
+Si un jour ton `npm run dev` ou `npm run build` se comporte différemment du mien alors qu'on a le même code, c'est presque toujours un des deux trucs suivants :
+
+- Quelqu'un a fait `npm install` au lieu de `npm ci` et a laissé les nouvelles versions dans `package-lock.json` → vérifier `git diff package-lock.json` avant de commit, ne jamais commit un `package-lock.json` modifié sans avoir explicitement voulu changer une dépendance.
+- Une version de Node différente → refaire `nvm use` et vérifier avec `node -v` que ça affiche bien `v20.x.x`.
 
 ## Structure du projet
 
@@ -26,7 +77,7 @@ app/
   types/
 server/            <- API routes / server middleware
 public/
-test/
+tests/
   unit/            <- tests Vitest en environnement Node (ex. promotions.spec.ts)
   nuxt/            <- tests Vitest en environnement Nuxt (composants, composables)
 docs/
@@ -35,35 +86,9 @@ nuxt.config.ts
 vitest.config.ts
 ```
 
-## Installation
-
-Prérequis : Node.js 20+, npm, un accès en tant que collaborateur au dépôt.
-
-```bash
-git clone https://github.com/tatrishvili/ChampaShop.git
-cd ChampaShop
-npm install
-```
-
-Au premier `npm install`, deux paquets (`esbuild`, `unrs-resolver`) demandent l'autorisation d'exécuter un script d'installation (téléchargement de binaires natifs, comportement normal de Vite/Nuxt) :
-
-```bash
-npm install-scripts approve esbuild
-npm install-scripts approve unrs-resolver
-```
-
-Lancer le serveur de dev :
-
-```bash
-npm run dev
-```
-
-Le site tourne sur http://localhost:3000.
-
 ## Branches de travail
 
-Ne travaillez jamais directement sur `main`. Après le clone :
-
+Ne jamais travailler directement sur `main` ou `develop`. Après le clone :
 ```bash
 git checkout develop
 git pull
@@ -116,7 +141,7 @@ git checkout -b feature/<numéro-issue>-<description>
 
 ## Stratégie filtre prix min/max
 
-DummyJSON ne propose pas de filtre prix côté API. Stratégie retenue : _à documenter ici_ (ex. : récupération de la catégorie/recherche filtrée côté serveur, puis filtrage prix côté client sur la page courante, avec impact discuté sur pagination et performance).
+DummyJSON ne propose pas de filtre prix côté API. Stratégie retenue : _à documenter ici_.
 
 ## Usage de l'IA
 
