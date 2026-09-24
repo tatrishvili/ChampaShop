@@ -5,7 +5,7 @@ API produits & auth : [DummyJSON](https://dummyjson.com).
 
 ## Stack et versions exactes
 
-- Node.js **20** (voir `.nvmrc`)
+- Node.js **24** (voir `.nvmrc`)
 - Nuxt **4.5.2**
 - Vue **3.5.43**
 - Pinia (`@pinia/nuxt` **1.0.2**)
@@ -23,7 +23,7 @@ Avec [nvm](https://github.com/nvm-sh/nvm) installé :
 ```bash
 nvm use
 ```
-Si Node 20 n'est pas installé sur ta machine :
+Si Node 24 n'est pas installé sur ta machine :
 ```bash
 nvm install
 ```
@@ -58,10 +58,11 @@ Le site tourne sur http://localhost:3000.
 
 ## Si jamais nos environnements divergent
 
-Si un jour ton `npm run dev` ou `npm run build` se comporte différemment du mien alors qu'on a le même code, c'est presque toujours un des deux trucs suivants :
+Si un jour ton `npm run dev` ou `npm run build` se comporte différemment du mien alors qu'on a le même code, c'est presque toujours un des trucs suivants :
 
-- Quelqu'un a fait `npm install` au lieu de `npm ci` et a laissé les nouvelles versions dans `package-lock.json` → vérifier `git diff package-lock.json` avant de commit, ne jamais commit un `package-lock.json` modifié sans avoir explicitement voulu changer une dépendance.
-- Une version de Node différente → refaire `nvm use` et vérifier avec `node -v` que ça affiche bien `v20.x.x`.
+- Quelqu'un a fait `npm install` au lieu de `npm ci` et a laissé les nouvelles versions dans `package-lock.json` → vérifier `git diff package-lock.json` avant de committer, ne jamais committer un `package-lock.json` modifié sans avoir explicitement voulu changer une dépendance.
+- Une version de Node différente → refaire `nvm use` et vérifier avec `node -v` que ça affiche bien `v24.x.x`.
+- `node_modules` corrompu ou partiellement installé (cache npm défaillant, installation interrompue) → `npm cache clean --force`, puis `rm -rf node_modules package-lock.json`, `git checkout package-lock.json`, et enfin `npm ci`.
 
 ## Structure du projet
 
