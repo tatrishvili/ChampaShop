@@ -136,9 +136,8 @@ git checkout -b feature/<numéro-issue>-<description>
 
 | Membre     | Rôle / zones principales        |
 |------------|----------------------------------|
-| _à remplir_ | Catalogue (F1), SEO fiche produit |
-| _à remplir_ | Panier & promotions (F3, F4)      |
-| _à remplir_ | Authentification (F5), CI/CD      |
+| Ana | Fiche produit (F2), Panier & promotions (F3, F4) |
+| Teammate | Catalogue (F1), Authentification (F5), CI/CD |
 
 ## Stratégie filtre prix min/max
 

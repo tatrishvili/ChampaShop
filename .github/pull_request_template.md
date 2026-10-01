@@ -9,4 +9,4 @@ Closes #
 - [ ] `npm run lint`, `npm run typecheck` et `npm run test` passent
 - [ ] Pas de `any`, types exportés dans `app/types/`
 - [ ] Testé au clavier
-- [ ] Partie significative générée par IA ? Si oui, détaillée dans AI_USAGE.md
+- [ ] Partie significative générée par IA ? Si oui, détaillée dans docs/ai-usage/<prenom>.md
