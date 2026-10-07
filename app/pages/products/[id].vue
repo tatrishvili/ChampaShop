@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtLink to="/produits">Back to catalog</NuxtLink>
+    <NuxtLink to="/products">Back to catalog</NuxtLink>
 
     <div v-if="pending" aria-busy="true">
       <div class="skeleton">Loading product…</div>
