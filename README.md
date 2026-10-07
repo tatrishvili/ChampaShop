@@ -142,7 +142,24 @@ git checkout -b feature/<numéro-issue>-<description>
 
 ## Stratégie filtre prix min/max
 
-DummyJSON ne propose pas de filtre prix côté API. Stratégie retenue : _à documenter ici_.
+DummyJSON ne propose **aucun filtre prix** côté API. Stratégie retenue :
+**« fetch-all → filtrer → paginer côté client »**, mutualisée avec la recherche
+par titre (déjà dans ce cas).
+
+- **Appels** : quand `minPrice`/`maxPrice` (ou une recherche) sont actifs, un
+  **seul** appel large (`limit=0`) sur l'endpoint le plus restrictif (catégorie,
+  recherche, sinon tout) ; le prix se greffe sur cet appel sans en ajouter.
+  Sans filtre client, on garde la pagination serveur (`limit`+`skip`). État dans
+  l'URL (`?minPrice=&maxPrice=`), partageable.
+- **Performance** : catalogue petit (≈ 194 produits) → filtrage `Array.filter`
+  en O(n) imperceptible ; champs débouncés (300 ms) ; *last-call-wins* de
+  `useAsyncData` contre les courses. Limite assumée (ne passerait pas à l'échelle
+  sur des milliers de produits → à pousser côté serveur sur une vraie API).
+- **Pagination** : obligatoirement côté client dès qu'un filtre client est actif
+  (sinon pages incomplètes), avec `total` recalculé après filtrage ; changer un
+  filtre prix réinitialise la page à 1.
+
+Justification complète (appels, performance, pagination) : **[`docs/README.md`](./docs/README.md)**.
 
 ## Usage de l'IA
 
