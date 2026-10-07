@@ -1,9 +1,3 @@
-/**
- * DummyJSON API response types.
- * Written by hand from the real API responses (see https://dummyjson.com/docs/products).
- * All components, stores and composables import these — no inline product shapes.
- */
-
 export interface ProductDimensions {
   width: number
   height: number
