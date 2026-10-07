@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Category } from '~/types/dummyjson'
+import type { ProductsCategory } from '~/types/dummyjson'
 
 const route = useRoute()
 const router = useRouter()
 
 const { data: categories } = useAsyncData('categories', () =>
-  $fetch<Category[]>('https://dummyjson.com/products/categories'),
+  $fetch<ProductsCategory[]>('https://dummyjson.com/products/categories'),
 )
 
 // French labels for the English category slugs returned by the API.
