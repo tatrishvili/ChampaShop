@@ -8,11 +8,13 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "vitest",
+    "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
     "test:unit": "vitest --project unit",
-    "test:nuxt": "vitest --project nuxt"
+    "test:nuxt": "vitest --project nuxt",
+    "lint": "eslint .",
+    "typecheck": "nuxi typecheck"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.17.0",
@@ -27,7 +29,10 @@
   "devDependencies": {
     "@vitest/coverage-v8": "^5.0.1",
     "@vue/test-utils": "^2.5.1",
-    "vitest": "^5.0.1"
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.9",
+    "vitest": "^5.0.1",
+    "vue-tsc": "^3.3.11"
   },
   "allowScripts": {
     "esbuild@0.28.2": true,
