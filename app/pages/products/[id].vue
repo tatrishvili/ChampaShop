@@ -36,6 +36,7 @@
 import ProductGallery from '../../components/product/ProductGallery.vue'
 import StockBadge from '../../components/product/StockBadge.vue'
 import AddToCart from '../../components/product/AddToCart.vue'
+import { useRecentlyViewedStore } from '../../stores/recently-viewed'
 import type { CartProductSnapshot, Product } from '../../types/dummyjson'
 import { eurosToCents, formatCents, discountBadge } from '../../utils/money'
 
@@ -59,6 +60,19 @@ const { data: product, pending, error, refresh } = await useAsyncData<Product>(
       throw err
     }
   }
+)
+
+// Track the visit only for an existing product: on 404 / fetch error the
+// handler throws, `product` stays null and nothing is recorded. `immediate`
+// covers SSR, client hydration and a successful Retry after a failed load;
+// revisits are deduplicated by pushRecentlyViewed.
+const recentlyViewed = useRecentlyViewedStore()
+watch(
+  product,
+  (value) => {
+    if (value) recentlyViewed.record(value.id)
+  },
+  { immediate: true }
 )
 
 const snapshot = computed<CartProductSnapshot>(() => ({
