@@ -18,9 +18,11 @@
 
 <style scoped>
 .skeleton-card {
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
   overflow: hidden;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
 }
 
 .skeleton-card__image {
@@ -58,9 +60,9 @@
   height: 12px;
 }
 
-/* Grey base + sweeping highlight. */
+/* Rose-tinted base + sweeping highlight. */
 .skeleton-card__shimmer {
-  background: linear-gradient(90deg, #eee 25%, #f5f5f5 37%, #eee 63%);
+  background: linear-gradient(90deg, #f6ebef 25%, #fdf4f7 37%, #f6ebef 63%);
   background-size: 400% 100%;
   animation: skeleton-shimmer 1.4s ease infinite;
 }
@@ -78,7 +80,7 @@
 @media (prefers-reduced-motion: reduce) {
   .skeleton-card__shimmer {
     animation: none;
-    background: #eee;
+    background: #f6ebef;
   }
 }
 </style>

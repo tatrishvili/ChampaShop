@@ -16,12 +16,22 @@ const hasActiveFilter = computed(() => {
 </script>
 
 <template>
-  <div class="catalog">
+  <div class="catalog container">
+    <header class="catalog__header">
+      <p class="catalog__eyebrow">Notre sélection</p>
+      <h1 class="catalog__title">Catalogue beauté</h1>
+      <p class="catalog__subtitle">
+        Soins, parfums et essentiels qui font rayonner votre routine.
+      </p>
+    </header>
+
     <!-- Filters stay mounted in every state so the user can always adjust or
          clear them, even on an empty result or a network error. -->
-    <ProductSearch />
-    <ProductFilters />
-    <ProductPriceFilter />
+    <div class="catalog__toolbar">
+      <ProductSearch />
+      <ProductFilters />
+      <ProductPriceFilter />
+    </div>
 
     <!-- Loading: skeleton grid. Shown on the first client load and on every
          refetch (filter / page change). SSR awaits the data, so the server
@@ -80,27 +90,64 @@ const hasActiveFilter = computed(() => {
 
 <style scoped>
 .catalog {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 16px;
+  padding-block: 32px 48px;
+}
+
+.catalog__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 28px;
+}
+
+.catalog__eyebrow {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.catalog__title {
+  font-family: var(--font-display);
+  margin: 0 0 0.5rem;
+}
+
+.catalog__subtitle {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.catalog__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 16px;
+  padding: 16px;
+  margin-bottom: 28px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 20px;
 }
 
 .catalog__state {
+  grid-column: 1 / -1;
   text-align: center;
-  padding: 64px 16px;
-  color: #666;
+  padding: 72px 16px;
+  color: var(--color-text-muted);
 }
 
 .catalog__state-title {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #111;
+  color: var(--color-text);
   margin: 0 0 8px;
 }
 
@@ -109,19 +156,32 @@ const hasActiveFilter = computed(() => {
 }
 
 .catalog__action {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 1px solid #111;
-  border-radius: 8px;
-  background: #111;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
   color: #fff;
+  font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
   cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .catalog__action:hover {
-  background: #333;
-  border-color: #333;
+  background: var(--color-primary-strong);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 560px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .catalog__toolbar {
+    padding: 14px;
+    border-radius: var(--radius-md);
+  }
 }
 </style>

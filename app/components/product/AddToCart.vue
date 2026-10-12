@@ -1,18 +1,26 @@
 <template>
-  <div>
-    <label :for="`add-qty-${product.id}`">Quantity</label>
-    <input
-      :id="`add-qty-${product.id}`"
-      v-model.number="qty"
-      type="number"
-      min="1"
-      :max="product.stock"
-      :disabled="product.stock === 0"
+  <div class="add-to-cart">
+    <div class="add-to-cart__row">
+      <label class="add-to-cart__label" :for="`add-qty-${product.id}`">Quantité</label>
+      <input
+        :id="`add-qty-${product.id}`"
+        v-model.number="qty"
+        class="add-to-cart__qty"
+        type="number"
+        min="1"
+        :max="product.stock"
+        :disabled="product.stock === 0"
+      >
+    </div>
+    <button
+      type="button"
+      class="btn btn--block add-to-cart__btn"
+      :disabled="product.stock === 0 || qty < 1"
+      @click="addToCart"
     >
-    <button type="button" :disabled="product.stock === 0 || qty < 1" @click="addToCart">
-      {{ product.stock === 0 ? 'Out of stock' : 'Add to cart' }}
+      {{ product.stock === 0 ? 'Rupture de stock' : 'Ajouter au panier' }}
     </button>
-    <p v-if="added" role="status">Added to cart.</p>
+    <p v-if="added" class="add-to-cart__status" role="status">✓ Ajouté au panier.</p>
   </div>
 </template>
 
@@ -34,3 +42,43 @@ function addToCart(): void {
   added.value = true
 }
 </script>
+
+<style scoped>
+.add-to-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.add-to-cart__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.add-to-cart__label {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.add-to-cart__qty {
+  width: 80px;
+  text-align: center;
+  padding: 0.6rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+
+.add-to-cart__btn {
+  font-size: 1rem;
+  padding-block: 0.85rem;
+}
+
+.add-to-cart__status {
+  margin: 0;
+  color: var(--color-success);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+</style>

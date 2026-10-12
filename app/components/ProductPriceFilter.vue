@@ -45,8 +45,7 @@ const maxPrice = useDebouncedQuery('maxPrice')
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .price-filter__field {
@@ -56,26 +55,23 @@ const maxPrice = useDebouncedQuery('maxPrice')
 }
 
 .price-filter__label {
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding-left: 0.2rem;
 }
 
 .price-filter__input {
   width: 110px;
-  padding: 10px 14px;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
   font-size: 0.95rem;
-  background: #fff;
-}
-
-.price-filter__input:focus {
-  outline: none;
-  border-color: #111;
+  background: var(--color-surface);
 }
 
 .price-filter__sep {
-  padding-bottom: 10px;
-  color: #999;
+  padding-bottom: 0.7rem;
+  color: var(--color-text-muted);
 }
 </style>
