@@ -28,6 +28,8 @@
       </dl>
 
       <AddToCart :product="snapshot" />
+
+      <RecentlyViewedSection :exclude-id="product.id" />
     </article>
   </div>
 </template>
@@ -36,6 +38,7 @@
 import ProductGallery from '../../components/product/ProductGallery.vue'
 import StockBadge from '../../components/product/StockBadge.vue'
 import AddToCart from '../../components/product/AddToCart.vue'
+import RecentlyViewedSection from '../../components/recently-viewed/RecentlyViewedSection.vue'
 import { useRecentlyViewedStore } from '../../stores/recently-viewed'
 import type { CartProductSnapshot, Product } from '../../types/dummyjson'
 import { eurosToCents, formatCents, discountBadge } from '../../utils/money'

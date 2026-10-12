@@ -7,11 +7,14 @@
       <NuxtLink v-if="auth.isAuthenticated" to="/account">Mon compte</NuxtLink>
       <NuxtLink v-else to="/login">Se connecter</NuxtLink>
     </nav>
+
+    <RecentlyViewedSection />
   </section>
 </template>
 
 <script setup lang="ts">
 import { useAuthStore } from '../stores/auth'
+import RecentlyViewedSection from '../components/recently-viewed/RecentlyViewedSection.vue'
 
 const auth = useAuthStore()
 
