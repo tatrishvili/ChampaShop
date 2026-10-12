@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="pdp container">
     <NuxtLink to="/products" class="pdp__back">
       <span aria-hidden="true">←</span> Retour au catalogue
@@ -59,37 +58,6 @@
           </div>
         </dl>
       </div>
-=======
-  <div>
-    <NuxtLink to="/products">Back to catalog</NuxtLink>
-
-    <div v-if="pending" aria-busy="true">
-      <div class="skeleton">Loading product…</div>
-    </div>
-
-    <div v-else-if="error">
-      <p role="alert">Could not load this product.</p>
-      <button type="button" @click="refresh()">Retry</button>
-    </div>
-
-    <article v-else-if="product">
-      <h1>{{ product.title }}</h1>
-      <p>{{ formatCents(eurosToCents(product.price)) }}</p>
-      <p v-if="product.discountPercentage">Badge: {{ discountBadge(product.discountPercentage) }}</p>
-      <p>Rating: {{ product.rating }} / 5</p>
-
-      <ProductGallery :images="product.images" :title="product.title" />
-      <StockBadge :stock="product.stock" />
-
-      <p>{{ product.description }}</p>
-      <dl>
-        <div><dt>Brand</dt><dd>{{ product.brand }}</dd></div>
-        <div><dt>Warranty</dt><dd>{{ product.warrantyInformation }}</dd></div>
-        <div><dt>Shipping</dt><dd>{{ product.shippingInformation }}</dd></div>
-      </dl>
-
-      <AddToCart :product="snapshot" />
->>>>>>> 7be895eac2b80b150cef1df0e7a8f221f7d85909
     </article>
   </div>
 </template>
@@ -140,7 +108,6 @@ useSeoMeta({
   ogImage: () => product.value?.thumbnail ?? ''
 })
 </script>
-<<<<<<< HEAD
 
 <style scoped>
 .pdp {
@@ -303,5 +270,3 @@ useSeoMeta({
   }
 }
 </style>
-=======
->>>>>>> 7be895eac2b80b150cef1df0e7a8f221f7d85909

@@ -1,7 +1,6 @@
 <template>
   <div class="app-shell">
     <NuxtRouteAnnouncer />
-<<<<<<< HEAD
     <a href="#main" class="skip-link">Aller au contenu</a>
 
     <header class="site-header">
@@ -14,11 +13,11 @@
         <nav class="site-nav" aria-label="Navigation principale">
           <NuxtLink to="/" class="site-nav__link">Accueil</NuxtLink>
           <NuxtLink to="/products" class="site-nav__link">Catalogue</NuxtLink>
-          <NuxtLink v-if="!auth.isAuthenticated" to="/connexion" class="site-nav__link">
+          <NuxtLink v-if="!auth.isAuthenticated" to="/login" class="site-nav__link">
             Connexion
           </NuxtLink>
           <template v-else>
-            <NuxtLink to="/connexion" class="site-nav__account">
+            <NuxtLink to="/account" class="site-nav__account">
               <img
                 v-if="auth.user?.image"
                 :src="auth.user.image"
@@ -35,7 +34,7 @@
           </template>
         </nav>
 
-        <NuxtLink to="/panier" class="cart-pill" aria-label="Voir le panier">
+        <NuxtLink to="/cart" class="cart-pill" aria-label="Voir le panier">
           <svg
             class="cart-pill__icon"
             viewBox="0 0 24 24"
@@ -54,20 +53,6 @@
           <span v-if="cart.count > 0" class="cart-pill__count">{{ cart.count }}</span>
         </NuxtLink>
       </div>
-=======
-    <a href="#main" class="skip-link">Skip to content</a>
-    <header>
-      <nav aria-label="Main navigation">
-        <NuxtLink to="/">ChampaShop</NuxtLink>
-        <NuxtLink to="/products">Catalogue</NuxtLink>
-        <NuxtLink to="/cart">Panier ({{ cart.count }})</NuxtLink>
-        <template v-if="auth.isAuthenticated">
-          <NuxtLink to="/account">Mon compte</NuxtLink>
-          <button type="button" @click="auth.logout()">Déconnexion</button>
-        </template>
-        <NuxtLink v-else to="/login">Connexion</NuxtLink>
-      </nav>
->>>>>>> 7be895eac2b80b150cef1df0e7a8f221f7d85909
     </header>
 
     <main id="main" class="site-main">
@@ -83,8 +68,8 @@
         </div>
         <nav class="site-footer__links" aria-label="Liens de pied de page">
           <NuxtLink to="/products">Catalogue</NuxtLink>
-          <NuxtLink to="/panier">Panier</NuxtLink>
-          <NuxtLink to="/connexion">Connexion</NuxtLink>
+          <NuxtLink to="/cart">Panier</NuxtLink>
+          <NuxtLink to="/login">Connexion</NuxtLink>
         </nav>
         <p class="site-footer__legal muted">© {{ year }} ChampaShop. Tous droits réservés.</p>
       </div>
@@ -99,10 +84,7 @@ import { useAuthStore } from './stores/auth'
 
 const cart = useCartStore()
 const auth = useAuthStore()
-<<<<<<< HEAD
 const year = computed(() => new Date().getFullYear())
-=======
->>>>>>> 7be895eac2b80b150cef1df0e7a8f221f7d85909
 </script>
 
 <style scoped>
