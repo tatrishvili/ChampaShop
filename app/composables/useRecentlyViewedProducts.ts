@@ -1,4 +1,4 @@
-import type { Product } from '~/types/dummyjson'
+import type { RecentlyViewedProduct } from '~/types/dummyjson'
 import { useRecentlyViewedStore } from '~/stores/recently-viewed'
 
 /**
@@ -36,14 +36,14 @@ export function useRecentlyViewedProducts(options: UseRecentlyViewedProductsOpti
     return store.ids.filter((id) => id !== excludeId)
   })
 
-  const { data, pending, error, refresh } = useAsyncData<Product[]>(
+  const { data, pending, error, refresh } = useAsyncData<RecentlyViewedProduct[]>(
     () => `recently-viewed:${ids.value.join(',')}`,
     async () => {
       if (ids.value.length === 0) return []
 
       const results = await Promise.allSettled(
         ids.value.map((id) =>
-          $fetch<Product>(`https://dummyjson.com/products/${id}`, {
+          $fetch<RecentlyViewedProduct>(`https://dummyjson.com/products/${id}`, {
             query: { select: SELECT_FIELDS }
           })
         )
