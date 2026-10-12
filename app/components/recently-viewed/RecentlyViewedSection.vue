@@ -12,6 +12,14 @@ const { products } = useRecentlyViewedProducts({
   excludeId: () => props.excludeId
 })
 
+// Show the section only when at least one *other* id exists in the history:
+// a first-time visit (history = current product only) stays silent, while
+// zombie ids (deleted products) still reveal the heading + clear button.
+const visibleCount = computed<number>(() => {
+  if (props.excludeId === undefined) return store.ids.length
+  return store.ids.filter((id) => id !== props.excludeId).length
+})
+
 function formatPrice(price: number): string {
   return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(price)
 }
@@ -19,7 +27,7 @@ function formatPrice(price: number): string {
 
 <template>
   <section
-    v-if="store.ids.length > 0"
+    v-if="visibleCount > 0"
     aria-labelledby="recently-viewed-heading"
     class="recently-viewed"
   >
