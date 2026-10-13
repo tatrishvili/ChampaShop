@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ProductsResponse } from '~/types/dummyjson'
+import RecentlyViewedSection from '../components/recently-viewed/RecentlyViewedSection.vue'
 
 // On-brand, SSR-rendered data for the landing page: the beauty category feeds
 // both the hero visual and the "Coups de cœur" strip (one request, coherent
@@ -121,6 +122,11 @@ useSeoMeta({
       </div>
       <p v-else class="muted">Les produits arrivent bientôt.</p>
     </section>
+
+    <!-- Recently viewed -->
+    <div class="container">
+      <RecentlyViewedSection />
+    </div>
 
     <!-- Promo banner -->
     <section class="container section">

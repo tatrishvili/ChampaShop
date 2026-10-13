@@ -66,3 +66,9 @@ export interface CartProductSnapshot {
   stock: number
   thumbnail: string
 }
+
+/** Fields the recently-viewed cards render (fetched with `?select=`). */
+export type RecentlyViewedProduct = Pick<
+  Product,
+  'id' | 'title' | 'price' | 'thumbnail' | 'rating' | 'stock' | 'discountPercentage'
+>
