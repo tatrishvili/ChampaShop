@@ -48,7 +48,7 @@ function formatPrice(price: number): string {
             :alt="product.title"
             class="recently-viewed__image"
             loading="lazy"
-          />
+          >
           <span v-if="product.discountPercentage > 0" class="recently-viewed__badge">
             −{{ Math.round(product.discountPercentage) }}%
           </span>
@@ -75,20 +75,25 @@ function formatPrice(price: number): string {
 
 .recently-viewed__header h2 {
   margin: 0;
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
 }
 
 .recently-viewed__clear {
-  border: 1px solid #ccc;
-  background: #fff;
-  border-radius: 6px;
-  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .recently-viewed__clear:hover {
-  background: #f5f5f5;
+  border-color: var(--color-primary);
+  color: var(--color-primary-strong);
 }
 
 .recently-viewed__list {
@@ -105,41 +110,50 @@ function formatPrice(price: number): string {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.22s ease, transform 0.22s ease,
+    border-color 0.22s ease;
 }
 
 .recently-viewed__card:hover,
 .recently-viewed__card:focus-visible {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rose-200);
 }
 
 .recently-viewed__image {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  background: #f5f5f5;
+  background: var(--color-bg-soft);
+  padding: 10px;
+  mix-blend-mode: multiply;
 }
 
 .recently-viewed__badge {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: #d32f2f;
+  top: 10px;
+  left: 10px;
+  background: var(--color-primary);
   color: #fff;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
 }
 
 .recently-viewed__title {
   padding: 8px 12px 0;
   font-size: 0.9rem;
+  color: var(--color-text);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -149,5 +163,6 @@ function formatPrice(price: number): string {
 .recently-viewed__price {
   padding: 0 12px 12px;
   font-weight: 700;
+  color: var(--color-text);
 }
 </style>
