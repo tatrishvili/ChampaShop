@@ -59,6 +59,8 @@
         </dl>
       </div>
     </article>
+
+    <RecentlyViewedSection v-if="product" :exclude-id="product.id" />
   </div>
 </template>
 
