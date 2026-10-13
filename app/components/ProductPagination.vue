@@ -103,25 +103,31 @@ const hasNext = computed(() => props.page < props.totalPages)
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 36px;
-  padding: 0 10px;
-  border: 1px solid #e5e5e5;
-  border-radius: 6px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
   text-decoration: none;
-  color: inherit;
+  color: var(--color-text);
   font-size: 0.9rem;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  font-weight: 500;
+  background: var(--color-surface);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .pagination__btn:hover,
 .pagination__page:hover {
-  background: #f5f5f5;
+  background: var(--color-primary-soft);
+  border-color: var(--rose-200);
+  color: var(--color-primary-strong);
+  text-decoration: none;
 }
 
-.pagination__page--active {
-  background: #111;
-  border-color: #111;
+.pagination__page--active,
+.pagination__page--active:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
   color: #fff;
 }
 
@@ -131,12 +137,14 @@ const hasNext = computed(() => props.page < props.totalPages)
 }
 
 .pagination__btn--disabled:hover {
-  background: none;
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
 }
 
 .pagination__ellipsis {
   min-width: 24px;
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
 }
 </style>

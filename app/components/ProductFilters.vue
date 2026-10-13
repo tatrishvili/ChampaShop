@@ -130,20 +130,22 @@ function onSort(event: Event) {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 20px;
 }
 
 .product-filters__select {
-  padding: 10px 14px;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  padding: 0.7rem 2.2rem 0.7rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
   font-size: 0.95rem;
-  background: #fff;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b5335f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 14px;
   cursor: pointer;
-}
-
-.product-filters__select:focus {
-  outline: none;
-  border-color: #111;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 </style>

@@ -39,67 +39,89 @@ const formattedPrice = computed(() =>
 
 <style scoped>
 .product-card {
-  display: block;
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.22s ease, transform 0.22s ease,
+    border-color 0.22s ease;
 }
 
 .product-card:hover {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--rose-200);
+  text-decoration: none;
 }
 
 .product-card__image-wrapper {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: #f5f5f5;
+  background: var(--color-bg-soft);
+  padding: 10px;
 }
 
 .product-card__image {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .product-card__badge {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: #d32f2f;
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
+  top: 10px;
+  left: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
 }
 
 .product-card__content {
-  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 14px 16px 16px;
 }
 
 .product-card__title {
   font-size: 0.95rem;
   font-weight: 500;
-  margin: 0 0 8px;
+  margin: 0;
+  color: var(--color-text);
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  min-height: 2.6em;
 }
 
 .product-card__price {
   font-weight: 700;
-  margin: 0 0 4px;
+  font-size: 1.05rem;
+  color: var(--color-text);
+  margin: 0;
 }
 
 .product-card__rating {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--color-text-muted);
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.product-card__rating span[aria-hidden='true'] {
+  color: var(--color-star);
 }
 </style>

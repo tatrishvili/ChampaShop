@@ -4,11 +4,17 @@ import type { AuthUser, LoginResponse, RefreshResponse } from '../types/auth'
 
 const BASE_URL = 'https://dummyjson.com'
 
-// Access-token lifetime requested at login/refresh. Kept deliberately short (1 min,
-// per the F5 spec: "Testez avec expiresInMins: 1") so the single-flight refresh is
-// easy to observe: within a minute of use a protected request 401s and triggers one
-// /auth/refresh. Bump this (e.g. 60) for a longer-lived session.
-const ACCESS_TOKEN_EXPIRES_IN_MINS = 1
+// Access-token lifetime requested at login/refresh. One hour gives a smooth
+// session for everyday use; the single-flight refresh below still kicks in when
+// it expires. Lower this to 1 to observe the refresh flow quickly (per the F5
+// spec: "Testez avec expiresInMins: 1").
+const ACCESS_TOKEN_EXPIRES_IN_MINS = 60
+
+/** Demo account provided by dummyjson, used to prefill the login form. */
+export const DEMO_CREDENTIALS = {
+  username: 'emilys',
+  password: 'emilyspass'
+} as const
 
 /**
  * Auth store (F5).
@@ -39,6 +45,11 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   const user = ref<AuthUser | null>(null)
+
+  const isAuthenticated = computed<boolean>(() => user.value !== null)
+  const displayName = computed<string>(
+    () => user.value?.firstName || user.value?.username || ''
+  )
 
   // Single-flight guard: holds the in-flight refresh promise so concurrent callers
   // join it instead of each firing their own /auth/refresh. Kept as a closure
@@ -163,7 +174,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user,
-    isAuthenticated: computed(() => user.value !== null),
+    isAuthenticated,
+    displayName,
     apiFetch,
     login,
     logout,
