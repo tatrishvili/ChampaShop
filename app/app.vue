@@ -59,6 +59,8 @@
       <NuxtPage />
     </main>
 
+    <CompareBar />
+
     <footer class="site-footer">
       <div class="container site-footer__inner">
         <div class="site-footer__brand">
@@ -81,6 +83,7 @@
 import { computed } from 'vue'
 import { useCartStore } from './stores/cart'
 import { useAuthStore } from './stores/auth'
+import CompareBar from './components/compare/CompareBar.vue'
 
 const cart = useCartStore()
 const auth = useAuthStore()

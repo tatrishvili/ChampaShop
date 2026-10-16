@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Product } from '~/types/dummyjson'
+import CompareButton from './compare/CompareButton.vue'
 
 const props = defineProps<{
   product: Product
@@ -13,40 +14,51 @@ const formattedPrice = computed(() =>
 </script>
 
 <template>
-  <NuxtLink :to="`/products/${product.id}`" class="product-card">
-    <div class="product-card__image-wrapper">
-      <img
-        :src="product.thumbnail"
-        :alt="product.title"
-        class="product-card__image"
-        loading="lazy"
-      />
-      <span v-if="hasDiscount" class="product-card__badge">
-        −{{ Math.round(product.discountPercentage) }}%
-      </span>
-    </div>
-
-    <div class="product-card__content">
-      <h3 class="product-card__title">{{ product.title }}</h3>
-      <p class="product-card__price">{{ formattedPrice }}</p>
-      <div class="product-card__rating">
-        <span aria-hidden="true">★</span>
-        <span>{{ product.rating.toFixed(1) }}</span>
+  <!-- Root is a plain container, not the link: the compare toggle is a
+       <button> and must not be nested inside the <a> (invalid HTML + it would
+       trigger navigation). The link wraps only the image + content. -->
+  <div class="product-card">
+    <NuxtLink :to="`/products/${product.id}`" class="product-card__link">
+      <div class="product-card__image-wrapper">
+        <img
+          :src="product.thumbnail"
+          :alt="product.title"
+          class="product-card__image"
+          loading="lazy"
+        />
+        <span v-if="hasDiscount" class="product-card__badge">
+          −{{ Math.round(product.discountPercentage) }}%
+        </span>
       </div>
-    </div>
-  </NuxtLink>
+
+      <div class="product-card__content">
+        <h3 class="product-card__title">{{ product.title }}</h3>
+        <p class="product-card__price">{{ formattedPrice }}</p>
+        <div class="product-card__rating">
+          <span aria-hidden="true">★</span>
+          <span>{{ product.rating.toFixed(1) }}</span>
+        </div>
+      </div>
+    </NuxtLink>
+
+    <CompareButton
+      :product-id="product.id"
+      :title="product.title"
+      variant="icon"
+      class="product-card__compare"
+    />
+  </div>
 </template>
 
 <style scoped>
 .product-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: var(--color-surface);
   border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-md);
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
   box-shadow: var(--shadow-sm);
   transition: box-shadow 0.22s ease, transform 0.22s ease,
     border-color 0.22s ease;
@@ -56,7 +68,25 @@ const formattedPrice = computed(() =>
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
   border-color: var(--rose-200);
+}
+
+.product-card__link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   text-decoration: none;
+  color: inherit;
+}
+.product-card__link:hover {
+  text-decoration: none;
+}
+
+/* Compare toggle overlaid on the image, kept clear of the discount badge. */
+.product-card__compare {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
 }
 
 .product-card__image-wrapper {
