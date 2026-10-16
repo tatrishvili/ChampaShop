@@ -43,6 +43,8 @@
           <AddToCart :product="snapshot" />
         </div>
 
+        <CompareButton :product-id="product.id" :title="product.title" />
+
         <dl class="pdp__meta">
           <div class="pdp__meta-row">
             <dt>Marque</dt>
@@ -68,6 +70,7 @@
 import ProductGallery from '../../components/product/ProductGallery.vue'
 import StockBadge from '../../components/product/StockBadge.vue'
 import AddToCart from '../../components/product/AddToCart.vue'
+import CompareButton from '../../components/compare/CompareButton.vue'
 import RecentlyViewedSection from '../../components/recently-viewed/RecentlyViewedSection.vue'
 import { useRecentlyViewedStore } from '../../stores/recently-viewed'
 import type { CartProductSnapshot, Product } from '../../types/dummyjson'
